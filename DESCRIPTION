@@ -1,0 +1,15 @@
+Package: rmio
+Title: Provides 'mio' Header Files
+Version: 0.1.0
+Authors@R: 
+    person(given = "Florian",
+           family = "Privé",
+           role = c("aut", "cre"),
+           email = "florian.prive.21@gmail.com")
+Description: Provides header files of 'mio', a cross-platform C++11 header-only 
+    library for memory mapped file IO.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.0
