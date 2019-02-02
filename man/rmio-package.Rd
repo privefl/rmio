@@ -4,7 +4,7 @@
 \name{rmio-package}
 \alias{rmio}
 \alias{rmio-package}
-\title{rmio: Provides 'mio' Header Files}
+\title{rmio: Provides 'mio' C++11 Header Files}
 \description{
 Provides header files of 'mio', a cross-platform C++11 header-only 
     library for memory mapped file IO.
