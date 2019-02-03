@@ -7,7 +7,15 @@
 \title{rmio: Provides 'mio' C++11 Header Files}
 \description{
 Provides header files of 'mio', a cross-platform C++11 header-only 
-    library for memory mapped file IO.
+    library for memory mapped file IO <https://github.com/mandreyel/mio>.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/privefl/rmio}
+  \item Report bugs at \url{https://github.com/privefl/rmio/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Florian Privé \email{florian.prive.21@gmail.com}
