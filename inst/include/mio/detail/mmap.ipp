@@ -183,6 +183,8 @@ inline mmap_context memory_map(const file_handle_type file_handle, const int64_t
             length_to_map));
     if(mapping_start == nullptr)
     {
+        // Close file handle if mapping it failed.
+        ::CloseHandle(file_mapping_handle);
         error = detail::last_error();
         return {};
     }
@@ -400,9 +402,10 @@ void basic_mmap<AccessMode, ByteT>::unmap()
     if(data_) { ::munmap(const_cast<pointer>(get_mapping_start()), mapped_length_); }
 #endif
 
-    // If file_handle_ was obtained by our opening it (when map is called with a path,
-    // rather than an existing file handle), we need to close it, otherwise it must not
-    // be closed as it may still be used outside this instance.
+    // If `file_handle_` was obtained by our opening it (when map is called with
+    // a path, rather than an existing file handle), we need to close it,
+    // otherwise it must not be closed as it may still be used outside this
+    // instance.
     if(is_handle_internal_)
     {
 #ifdef _WIN32
@@ -437,14 +440,14 @@ void basic_mmap<AccessMode, ByteT>::swap(basic_mmap& other)
     if(this != &other)
     {
         using std::swap;
-        swap(data_, other.data_); 
-        swap(file_handle_, other.file_handle_); 
+        swap(data_, other.data_);
+        swap(file_handle_, other.file_handle_);
 #ifdef _WIN32
-        swap(file_mapping_handle_, other.file_mapping_handle_); 
+        swap(file_mapping_handle_, other.file_mapping_handle_);
 #endif
-        swap(length_, other.length_); 
-        swap(mapped_length_, other.mapped_length_); 
-        swap(is_handle_internal_, other.is_handle_internal_); 
+        swap(length_, other.length_);
+        swap(mapped_length_, other.mapped_length_);
+        swap(is_handle_internal_, other.is_handle_internal_);
     }
 }
 
