@@ -14,7 +14,7 @@ testthat::test_that("Locks work for parallel incrementation", {
   library(bigparallelr)
   registerDoParallel(cl <- makeCluster(2))
   test <- foreach(k = 1:N, .combine = 'c') %dopar% {
-    bigstatsr::big_increment(mat2, k, use_lock = TRUE)
+    rmio::big_increment(mat2, k, use_lock = TRUE)
   }
   stopCluster(cl)
 

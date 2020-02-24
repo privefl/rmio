@@ -16,7 +16,9 @@ reconstruct_if_old <- function(fbm,
   obj.methods <- names(fbm$getClass()@refMethods)
 
   # In case it was generated from old versions
-  if (!all(FBM_FIELDS %in% obj.fields) || !all(FBM_METHODS %in% obj.methods)) {
+  if (!all(FBM_FIELDS  %in% obj.fields) ||
+      !all(FBM_METHODS %in% obj.methods) ||
+      attr(class(fbm), "package") == "bigstatsr") {
 
     message2(msg1)
     new.fbm <- FBM(

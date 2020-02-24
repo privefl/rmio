@@ -1,4 +1,4 @@
 library(testthat)
-library(bigstatsr)
+library(rmio)
 
 test_check("rmio")
