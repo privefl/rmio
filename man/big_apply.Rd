@@ -25,10 +25,10 @@ you may use \code{X[ind.row, ind.col[ind]]} in \code{a.FUN}.}
 
 \item{a.combine}{Function to combine the results with \code{do.call}.
 This function should accept multiple arguments (\code{...}). For example, you
-can use \code{c}, \code{cbind}, \code{rbind}. This package also provides function \code{plus}
+can use \code{c}, \code{cbind} and \code{rbind}. This package also provides function \code{plus}
 to add multiple arguments together. The default is \code{NULL}, in which case
 the results are not combined and are returned as a list, each element being
-the result of a block.}
+the result of \code{a.FUN} applied to one block.}
 
 \item{ind}{Initial vector of subsetting indices.
 Default is the vector of all column indices.}
@@ -37,20 +37,20 @@ Default is the vector of all column indices.}
 You may use \link{nb_cores}.}
 
 \item{block.size}{Maximum number of columns (or rows, depending on how you
-use \code{ind} for subsetting) read at once. Default uses \link{block_size}.}
+use \code{ind} for subsetting) accessed at once. Default uses \link{block_size}.}
 
 \item{...}{Extra arguments to be passed to \code{a.FUN}.}
 }
 \description{
-A Split-Apply-Combine strategy to apply common R functions to a
+A Split-Apply-Combine strategy to apply standard R functions to a
 Filebacked Big Matrix.
 }
 \details{
 This function splits indices in parts, then apply a given function to each
 subset matrix and finally combine the results. If parallelization is used,
-this function splits indices in parts for parallelization, then split again
-them on each core, apply a given function to each part and finally combine
-the results (on each cluster and then from each cluster).
+this function splits indices in parts for parallelization, then split them
+again for each core, apply the given function to each part and finally
+combine the results (within each cluster and then between each cluster).
 }
 \examples{
 X <- big_attachExtdata()

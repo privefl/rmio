@@ -94,7 +94,7 @@ test_that("big_attach() works (also with previous versions)", {
   expect_s4_class(X, "FBM.code256")
   expect_false(X$is_read_only)
 
-  old_file <- system.file("testdata", "before_readonly.rds", package = "bigstatsr")
+  old_file <- system.file("testdata", "before_readonly.rds", package = "rmio")
   expect_message(X <- big_attach(old_file),
                  "[FBM from an old version? Reconstructing..|You should `$save()` it again.]")
   expect_s4_class(X, "FBM.code256")
