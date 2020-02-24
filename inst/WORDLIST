@@ -15,6 +15,7 @@ bigmemory
 bigparallelr
 bigreadr
 bigsnpr
+bigstatsr
 biobank
 bioinformatics
 bioRxiv
@@ -45,6 +46,7 @@ fread
 fwrite
 ggplot
 GigaBytes
+github
 Gohel
 Hanley
 Hastie
@@ -59,6 +61,7 @@ IRLS
 Jiali
 Lett
 loadings
+mandreyel
 Mei
 mio
 multiplot
