@@ -1,6 +1,31 @@
 ################################################################################
 
-#' Determine a correct value for the block.size parameter
+#' Replace extension '.bk'
+#'
+#' @param path String with extension '.bk'.
+#' @param replacement Replacement of '.bk'. Default replaces by nothing.
+#' @param stop_if_not_ext If `replacement != ""`, whether to error if
+#'   replacement is not an extension (i.e. starting with a dot).
+#'
+#' @return String with extension '.bk' replaced by `replacement`.
+#' @export
+#'
+#' @examples
+#' path <- "toto.bk"
+#' sub_bk(path)
+#' sub_bk(path, ".rds")
+sub_bk <- function(path, replacement = "", stop_if_not_ext = TRUE) {
+  pattern <- "\\.bk$"
+  if (!grepl(pattern, path))
+    stop2("Path '%s' must have 'bk' extension.", path)
+  if (stop_if_not_ext && nchar(replacement) > 0 && substr(replacement, 1, 1) != ".")
+    stop2("Replacement must be an extension starting with '.' if provided.")
+  sub(pattern, replacement, path)
+}
+
+################################################################################
+
+#' Determine a good default value for the block.size parameter
 #'
 #' It determines the value of `block.size` such that a matrix of doubles of
 #' size `n` x `block.size` takes less memory than
@@ -17,6 +42,7 @@
 #' block_size(1e3)
 #' block_size(1e6)
 #' block_size(1e6, 6)
+#'
 block_size <- function(n, ncores = 1) {
   block.max <- getOption("bigstatsr.block.sizeGB") / ncores
   # 8 * n * m < opt * 1024^3

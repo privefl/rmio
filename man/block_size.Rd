@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{block_size}
 \alias{block_size}
-\title{Determine a correct value for the block.size parameter}
+\title{Determine a good default value for the block.size parameter}
 \usage{
 block_size(n, ncores = 1)
 }
@@ -23,4 +23,5 @@ size \code{n} x \code{block.size} takes less memory than
 block_size(1e3)
 block_size(1e6)
 block_size(1e6, 6)
+
 }

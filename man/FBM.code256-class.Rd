@@ -27,7 +27,7 @@ add_code256(x, code)
 
 \item{code}{A numeric vector (of length 256).
 You should construct it with \code{rep(NA_real_, 256)} and then replace the values
-which are of interest for you.}
+which are of interest to you.}
 
 \item{init}{Either a single value (e.g. \code{0}) or as many value as the number
 of elements of the FBM. \strong{Default doesn't initialize the matrix.}}
@@ -40,11 +40,11 @@ Default stores in the temporary directory.}
 existing one (which should be named by the \code{backingfile} parameter and have
 an extension ".bk"). For example, this could be used to convert a
 filebacked \code{big.matrix} from package \strong{bigmemory} to a \link[=FBM-class]{FBM}
-(see \href{https://privefl.github.io/bigstatsr/articles/bigstatsr-and-bigmemory.html}{the corresponding vignette}).}
+(see \href{http://bit.ly/2SRX5w4}{the corresponding vignette}).}
 
 \item{is_read_only}{Whether the FBM is read-only? Default is \code{FALSE}.}
 
-\item{x}{A \link[=FBM-class]{FBM}.}
+\item{x}{An object of class \link[=FBM-class]{FBM}.}
 }
 \description{
 A reference class for storing and accessing up to 256 arbitrary different
@@ -61,6 +61,7 @@ X[]
 code <- rep(NA_real_, 256)
 code[1:3] <- c(1, 3, 5)
 
+# From an FBM of type 'raw' ('unsigned char')
 X.code <- add_code256(X, code)
 X.code[]
 
@@ -68,7 +69,7 @@ X.code[]
 X.code2 <- FBM.code256(10, 10, code, init = sample(as.raw(0:3), 100, TRUE))
 X.code2[]
 
-# Copy the FBM with another code
+# Get a new FBM.code256 object with another code (but same underlying data)
 X.code3 <- X.code$copy(code = rnorm(256))
 all.equal(X.code$code256, code)
 

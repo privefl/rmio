@@ -7,10 +7,10 @@
 #' [Filebacked Big Matrix][FBM-class], it adds a slot `code` which is used as
 #' a lookup table of size 256.
 #'
-#' @param x A [FBM][FBM-class].
+#' @param x An object of class [FBM][FBM-class].
 #' @param code A numeric vector (of length 256).
 #' You should construct it with `rep(NA_real_, 256)` and then replace the values
-#' which are of interest for you.
+#' which are of interest to you.
 #' @inheritParams FBM
 #'
 #' @examples
@@ -21,6 +21,7 @@
 #' code <- rep(NA_real_, 256)
 #' code[1:3] <- c(1, 3, 5)
 #'
+#' # From an FBM of type 'raw' ('unsigned char')
 #' X.code <- add_code256(X, code)
 #' X.code[]
 #'
@@ -28,7 +29,7 @@
 #' X.code2 <- FBM.code256(10, 10, code, init = sample(as.raw(0:3), 100, TRUE))
 #' X.code2[]
 #'
-#' # Copy the FBM with another code
+#' # Get a new FBM.code256 object with another code (but same underlying data)
 #' X.code3 <- X.code$copy(code = rnorm(256))
 #' all.equal(X.code$code256, code)
 #'
@@ -129,19 +130,29 @@ add_code256 <- function(x, code) {
 #' `FBM.code256`.
 #'
 #' @inheritParams rmio-package
-#' @param byrow Count by rows rather than columns?
-#'   Default is `FALSE` (columns).
+#' @param byrow Count by rows rather than by columns?
+#'   Default is `FALSE` (count by columns).
 #'
-#' @example examples/example-counts.R
-#'
-#' @return A matrix of counts of K x m (or n) elements, where
-#' - K is the number of unique elements of the `BM.code`,
+#' @return A matrix of counts of K x m (or K x n if `byrow`) elements, where
+#' - K is the number of unique elements of the `$code256`,
 #' - n is its number of rows,
 #' - m is its number of columns.
 #'
-#' **Beware that K is up to 256. So, if you apply this on a Filebacked Big
-#' Matrix of one million columns, you will create a matrix of nearly 1GB!**.
+#' Beware that K is up to 256. So, if you apply this on a Filebacked Big
+#' Matrix of one million columns, you will create a matrix of nearly 1GB!
 #' @export
+#'
+#' @examples
+#' X <- big_attachExtdata()
+#' class(X)  # big_counts() is available for class FBM.code256 only
+#' X[1:5, 1:8]
+#'
+#' # by columns
+#' big_counts(X, ind.row = 1:5, ind.col = 1:8)
+#'
+#' # by rows
+#' big_counts(X, ind.row = 1:5, ind.col = 1:8, byrow = TRUE)
+#'
 big_counts <- function(X.code,
                        ind.row = rows_along(X.code),
                        ind.col = cols_along(X.code),

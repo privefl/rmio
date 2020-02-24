@@ -20,19 +20,19 @@ If not specified, all rows are used. \strong{Don't use negative indices.}}
 \item{ind.col}{An optional vector of the column indices that are used.
 If not specified, all columns are used. \strong{Don't use negative indices.}}
 
-\item{byrow}{Count by rows rather than columns?
-Default is \code{FALSE} (columns).}
+\item{byrow}{Count by rows rather than by columns?
+Default is \code{FALSE} (count by columns).}
 }
 \value{
-A matrix of counts of K x m (or n) elements, where
+A matrix of counts of K x m (or K x n if \code{byrow}) elements, where
 \itemize{
-\item K is the number of unique elements of the \code{BM.code},
+\item K is the number of unique elements of the \verb{$code256},
 \item n is its number of rows,
 \item m is its number of columns.
 }
 
-\strong{Beware that K is up to 256. So, if you apply this on a Filebacked Big
-Matrix of one million columns, you will create a matrix of nearly 1GB!}.
+Beware that K is up to 256. So, if you apply this on a Filebacked Big
+Matrix of one million columns, you will create a matrix of nearly 1GB!
 }
 \description{
 Counts by columns (or rows) the number of each unique element of a
@@ -48,4 +48,5 @@ big_counts(X, ind.row = 1:5, ind.col = 1:8)
 
 # by rows
 big_counts(X, ind.row = 1:5, ind.col = 1:8, byrow = TRUE)
+
 }

@@ -13,7 +13,7 @@ void incr_FBM_mat(Environment BM,
 
   XPtr<FBM_RW> xpBM = BM["address_rw"];
   if (xpBM->matrix_type() != 8)
-    Rcpp::stop("'big_increment()' works with 'double' FBMs only.");
+    Rcpp::stop("'big_increment()' works for 'double' FBMs only.");
 
   BMAcc_RW<double> macc(xpBM);
 
@@ -36,7 +36,7 @@ void incr_FBM_vec(Environment BM,
 
   XPtr<FBM_RW> xpBM = BM["address_rw"];
   if (xpBM->matrix_type() != 8)
-    Rcpp::stop("'big_increment()' works with 'double' FBMs only.");
+    Rcpp::stop("'big_increment()' works for 'double' FBMs only.");
 
   BMAcc_RW<double> macc(xpBM);
 

@@ -12,7 +12,6 @@
 #'
 #' @param ind.row An optional vector of the row indices that are used.
 #' If not specified, all rows are used. __Don't use negative indices.__
-#'
 #' @param ind.col An optional vector of the column indices that are used.
 #' If not specified, all columns are used. __Don't use negative indices.__
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/transpose.R
 \name{big_transpose}
 \alias{big_transpose}
-\title{Transposition}
+\title{Transpose an FBM}
 \usage{
 big_transpose(X, backingfile = tempfile())
 }
@@ -14,20 +14,16 @@ big_transpose(X, backingfile = tempfile())
 Default stores in the temporary directory.}
 }
 \value{
-The new transposed Filebacked Big Matrix (or its descriptor). Its dimensions
-and type are automatically determined from the input Filebacked Big Matrix.
+The new transposed Filebacked Big Matrix. Its dimensions and type
+are automatically determined from the input Filebacked Big Matrix.
 }
 \description{
 This function implements a simple cache-oblivious algorithm for
 the transposition of a Filebacked Big Matrix.
 }
 \examples{
-X <- FBM(10, 5, init = rnorm(50))
+X <- FBM(6, 5, init = rnorm(30))
 X[]
-Xt <- big_transpose(X)
-identical(t(X[]), Xt[])
-
-X <- big_attachExtdata()
 Xt <- big_transpose(X)
 identical(t(X[]), Xt[])
 
