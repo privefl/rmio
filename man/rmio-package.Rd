@@ -4,10 +4,28 @@
 \name{rmio-package}
 \alias{rmio}
 \alias{rmio-package}
-\title{rmio: Provides 'mio' C++11 Header Files}
+\title{rmio: Provides 'mio' C++11 Header Files and Class 'FBM'}
+\arguments{
+\item{X}{An object of class \link[=FBM-class]{FBM}.}
+
+\item{X.code}{An object of class \link[=FBM.code256-class]{FBM.code256}.}
+
+\item{ind.row}{An optional vector of the row indices that are used.
+If not specified, all rows are used. \strong{Don't use negative indices.}}
+
+\item{ind.col}{An optional vector of the column indices that are used.
+If not specified, all columns are used. \strong{Don't use negative indices.}}
+
+\item{block.size}{Maximum number of columns read at once.
+Default uses \link{block_size}.}
+
+\item{ncores}{Number of cores used. Default doesn't use parallelism.
+You may use \link{nb_cores}.}
+}
 \description{
 Provides header files of 'mio', a cross-platform C++11 header-only 
     library for memory mapped file IO <https://github.com/mandreyel/mio>.
+    Also provides class FBM (Filebacked Big Matrix) used in package 'bigstatsr'.
 }
 \seealso{
 Useful links:
@@ -21,4 +39,3 @@ Useful links:
 \strong{Maintainer}: Florian Privé \email{florian.prive.21@gmail.com}
 
 }
-\keyword{internal}
