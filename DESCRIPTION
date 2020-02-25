@@ -16,7 +16,7 @@ Imports:
     methods,
     Rcpp
 Suggests: 
-    bigmemory,
+    bigmemory (>= 4.5.33),
     bigreadr,
     spelling,
     testthat
