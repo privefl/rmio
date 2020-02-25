@@ -8,36 +8,52 @@ FBM_METHODS <- c("bm.desc", "bm", "add_columns", "save", "check_write_permission
 
 ################################################################################
 
-reconstruct_if_old <- function(fbm,
+#' Reconstruct FBM from old version
+#'
+#' @param X An FBM.
+#' @param msg1 Message before reconstructing.
+#' @param msg2 Message after reconstructing.
+#'
+#' @return New FBM object (or old one if no need for reconstruction).
+#' @export
+#'
+#' @keywords internal
+#'
+#' @examples
+#' rds <- system.file("testdata", "before_readonly.rds", package = "rmio")
+#' big_attach(rds)
+reconstruct_if_old <- function(X,
                                msg1 = "FBM from an old version? Reconstructing..",
                                msg2 = "You should `$save()` it again.") {
 
-  obj.fields  <- names(fbm$getClass()@fieldClasses)
-  obj.methods <- names(fbm$getClass()@refMethods)
+  obj.fields  <- names(X$getClass()@fieldClasses)
+  obj.methods <- names(X$getClass()@refMethods)
 
   # In case it was generated from old versions
-  if (!all(FBM_FIELDS  %in% obj.fields) ||
-      !all(FBM_METHODS %in% obj.methods) ||
-      attr(class(fbm), "package") == "bigstatsr") {
+  if (attr(class(X), "package") != "rmio" ||
+      !all(FBM_FIELDS  %in% obj.fields) ||
+      !all(FBM_METHODS %in% obj.methods)) {
 
     message2(msg1)
-    new.fbm <- FBM(
-      nrow = fbm$nrow,
-      ncol = fbm$ncol,
-      type = names(fbm$type),
+
+    new_X <- FBM(
+      nrow = X$nrow,
+      ncol = X$ncol,
+      type = names(X$type),
       init = NULL,
-      backingfile = sub_bk(fbm$backingfile),
+      backingfile = sub_bk(X$backingfile),
       create_bk = FALSE,
-      is_read_only = `if`(exists("is_read_only", fbm), fbm$is_read_only, FALSE)
+      is_read_only = `if`(exists("is_read_only", X), X$is_read_only, FALSE)
     )
 
-    if (inherits(fbm, "FBM.code256"))
-      new.fbm <- add_code256(new.fbm, code = fbm$code256)
+    if (inherits(X, "FBM.code256"))
+      new_X <- add_code256(new_X, code = X$code256)
 
     message2(msg2)
-    new.fbm
 
-  } else fbm
+    new_X
+
+  } else X
 }
 
 ################################################################################
@@ -62,13 +78,13 @@ big_attach <- function(rdsfile) {
 
   assert_exist(rdsfile)
   rdsfile <- normalizePath(rdsfile)
-  fbm <- readRDS(rdsfile)
+  X <- readRDS(rdsfile)
 
   # In case of moving files
-  if (!file.exists(fbm$backingfile <- sub("\\.rds$", ".bk", rdsfile)))
+  if (!file.exists(X$backingfile <- sub("\\.rds$", ".bk", rdsfile)))
     stop2("The backingfile associated with this FBM can't be found.")
 
-  reconstruct_if_old(fbm)
+  reconstruct_if_old(X)
 }
 
 #' @rdname big_attach

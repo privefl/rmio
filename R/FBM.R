@@ -287,8 +287,16 @@ FBM <- function(nrow, ncol,
                 create_bk = TRUE,
                 is_read_only = FALSE) {
 
-  type <- match.arg(type)
-  do.call(methods::new, args = c(Class = "FBM", as.list(environment())))
+  methods::new(
+    Class = "FBM",
+    nrow = nrow,
+    ncol = ncol,
+    type = match.arg(type),
+    init = init,
+    backingfile = backingfile,
+    create_bk = create_bk,
+    is_read_only = is_read_only
+  )
 }
 
 #' Convert to FBM
@@ -419,7 +427,7 @@ setMethod("length", signature(x = "FBM"), function(x) prod(dim(x)))
 
 #' @rdname FBM-methods
 #' @export
-setMethod("typeof", signature(x = "FBM"), function(x) names(x$type))
+setMethod("typeof", signature(x = "FBM"), function(x) x$type_chr)
 
 ################################################################################
 

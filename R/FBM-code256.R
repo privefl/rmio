@@ -50,10 +50,10 @@ FBM.code256_RC <- methods::setRefClass(
   methods = list(
     initialize = function(..., code) {
       .self$code256 <- code
-      callSuper(...)
+      callSuper(type = "unsigned char", ...)
     },
 
-    copy = function(code = .self$code256) {
+    copy = function(code) {
       add_code256(.self, code = code)
     },
 
@@ -95,9 +95,16 @@ FBM.code256 <- function(nrow, ncol,
   if (length(code) != 256)
     stop("'code' must be of length 256.")
 
-  do.call(methods::new, args = c(Class = "FBM.code256",
-                                 type = "unsigned char",
-                                 as.list(environment())))
+  methods::new(
+    Class = "FBM.code256",
+    nrow = nrow,
+    ncol = ncol,
+    code = code,
+    init = init,
+    backingfile = backingfile,
+    create_bk = create_bk,
+    is_read_only = is_read_only
+  )
 }
 
 #' Converter from class `FBM` to `FBM.code256`.

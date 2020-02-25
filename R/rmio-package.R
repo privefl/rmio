@@ -1,8 +1,8 @@
 ################################################################################
 
 #' @useDynLib rmio, .registration = TRUE
+#'
 #' @importFrom Rcpp sourceCpp
-#' @importFrom methods new
 #' @importFrom bigassertr message2 warning2 stop2
 #' @importFrom bigassertr assert_class assert_int assert_pos assert_all
 #' @importFrom bigassertr assert_args assert_dir assert_exist assert_noexist

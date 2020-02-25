@@ -11,13 +11,13 @@ Description: Provides header files of 'mio', a cross-platform C++11 header-only
 LinkingTo: 
     Rcpp
 Imports:
-    bigassertr,
-    bigparallelr,
+    bigassertr (>= 0.1.2),
+    bigparallelr (>= 0.2.3),
     methods,
     Rcpp
 Suggests: 
     bigmemory (>= 4.5.33),
-    bigreadr,
+    bigreadr (>= 0.2),
     spelling,
     testthat
 License: GPL-3
