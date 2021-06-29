@@ -1,3 +1,6 @@
+#ifndef RMIO_CREATE_FILE_HPP
+#define RMIO_CREATE_FILE_HPP
+
 /******************************************************************************/
 
 #include <fstream>
@@ -5,9 +8,9 @@
 
 /******************************************************************************/
 
-void create_file(const char * filename,
-                 std::size_t n_elem,
-                 std::size_t type_size) {
+inline void create_file(const char * filename,
+                        std::size_t n_elem,
+                        std::size_t type_size) {
 
   try {
     std::filebuf fbuf;
@@ -21,9 +24,9 @@ void create_file(const char * filename,
 
 /******************************************************************************/
 
-void append_file(const char * filename,
-                 std::size_t n_elem,
-                 std::size_t type_size) {
+inline void append_file(const char * filename,
+                        std::size_t n_elem,
+                        std::size_t type_size) {
 
   try {
     std::fstream filestr(filename);
@@ -36,3 +39,5 @@ void append_file(const char * filename,
 }
 
 /******************************************************************************/
+
+#endif // RMIO_CREATE_FILE_HPP
