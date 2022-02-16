@@ -3,6 +3,11 @@
 
 /******************************************************************************/
 
+// /!\ This is bullshit, and will get removed in the future /!\
+// Use instead the R functions provided here
+
+/******************************************************************************/
+
 #include <fstream>
 #include <stdexcept>
 
