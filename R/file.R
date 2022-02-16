@@ -5,7 +5,7 @@
 #' @param file Path name.
 #' @param size Size in bytes.
 #'
-#' @importFrom bigassertr assert_noexist assert_dir assert_exist
+#' @importFrom bigassertr assert_noexist assert_dir assert_exist stop2
 #'
 #' @return Input `file`, invisibly.
 #' @export
@@ -35,7 +35,8 @@ file_create <- function(file, size) {
 file_resize <- function(file, size) {
   file <- path.expand(file)
   assert_exist(file)
-  ff::file.resize(file, size)
+  success <- ff::file.resize(file, size)
+  if (!success) stop2("Problem when resizing '%s'.", file)
   invisible(file)
 }
 
